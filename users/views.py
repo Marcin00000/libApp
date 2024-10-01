@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import logout
 # Create your views here.
 
@@ -14,7 +14,7 @@ def register(request):
             if form.is_valid():
                 form.save()
                 username = form.cleaned_data.get('username')
-                messages.success(request, f'Account created for {username}')
+                messages.success(request, f'Konto utworzone dla {username}')
                 return redirect('login')
         else:
             form = UserRegisterForm()
@@ -23,7 +23,7 @@ def register(request):
 
 def logout_view(request):
     logout(request)
-    messages.info(request, 'Logged out successfully!')
+    messages.info(request, 'Wylogowano pomyślnie!')
     return redirect('login')
 
 
@@ -35,7 +35,7 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your account has been updated!')
+            messages.success(request, f'Twoje konto zostało zaktualizowane!')
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)

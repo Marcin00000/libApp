@@ -3,7 +3,6 @@ from django.urls import reverse
 
 
 # Create your models here.
-
 class Author(models.Model):
     name = models.CharField(max_length=100, verbose_name="Imię")
     surname = models.CharField(max_length=100, verbose_name="Nazwisko")
@@ -47,7 +46,7 @@ class Book(models.Model):
     publication_date = models.DateField( verbose_name="Data publikacji")
     description = models.TextField( verbose_name="Opis")
     page_count = models.IntegerField( verbose_name="Liczba stron")
-    # image_url = models.URLField()
+    image = models.ImageField(default='default.jpg', upload_to='book_pics')
 
 
     def __str__(self):
