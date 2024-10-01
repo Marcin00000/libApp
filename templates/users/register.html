@@ -1,0 +1,26 @@
+{% extends "books/index.html" %}
+{% load crispy_forms_filters %}
+{% block title %}Rejestracja{% endblock %}
+{% block content %}
+
+<div class="container-sm ">
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Rejestracja</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Zarejestruj</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Masz już konto? <a class="ml-2" href="{% url 'login' %}">Zaloguj się</a>
+            </small>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
