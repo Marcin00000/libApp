@@ -1,0 +1,17 @@
+{% extends "books/index.html" %}
+{% block content %}
+
+        <article class="media content-section">
+        <img class="rounded article-img w-25" src="{{ object.image.url }}" alt="book image">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="">{{ object.category }}</a>
+              <small class="text-muted">{{ object.publication_date|date:"Y" }}</small>
+            </div>
+            <h2 class="article-title">{{ object.title }}</h2>
+            <a class="mr-2" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>
+            <p class="article-content">{{ object.description }}</p>
+          </div>
+        </article>
+
+{% endblock %}
