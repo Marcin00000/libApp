@@ -1,0 +1,26 @@
+{% extends "books/home2.html" %}
+
+{% block content %}
+  <h2>Wypożyczone książki</h2>
+
+  {% if book_instances %}
+    <div class="book-list">
+      {% for book_instance in book_instances %}
+        <div class="book-detail">
+          <img src="{{ book_instance.book.image.url }}" alt="Okładka książki" style="max-width: 150px;">
+          <h3>{{ book_instance.book.title }}</h3>
+          <p><strong>Autor:</strong> {{ book_instance.book.author }}</p>
+          <p><strong>Kategoria:</strong> {{ book_instance.book.category }}</p>
+          <p><strong>Wydawca:</strong> {{ book_instance.book.publisher }}</p>
+          <p><strong>Data publikacji:</strong> {{ book_instance.book.publication_date }}</p>
+          <p><strong>Liczba stron:</strong> {{ book_instance.book.page_count }}</p>
+          <p><strong>ASIN:</strong> {{ book_instance.book.ASIN }}</p>
+          <p><strong>Kod egzemplarza:</strong> {{ book_instance.id_code }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Nie masz aktualnie wypożyczonych książek, które nie zostały zwrócone.</p>
+  {% endif %}
+
+{% endblock %}

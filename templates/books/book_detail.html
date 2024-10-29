@@ -1,17 +1,50 @@
-{% extends "books/index.html" %}
+{% extends "books/home2.html" %}
 {% block content %}
 
-        <article class="media content-section">
-        <img class="rounded article-img w-25" src="{{ object.image.url }}" alt="book image">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="">{{ object.category }}</a>
-              <small class="text-muted">{{ object.publication_date|date:"Y" }}</small>
-            </div>
-            <h2 class="article-title">{{ object.title }}</h2>
-            <a class="mr-2" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>
-            <p class="article-content">{{ object.description }}</p>
-          </div>
-        </article>
+{#        <article class="media content-section">#}
+{#        <img class="rounded article-img w-25" src="{{ object.image.url }}" alt="book image">#}
+{#          <div class="media-body">#}
+{#            <div class="article-metadata">#}
+{#                <a class="mr-2" href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a>#}
+{#                <small class="text-muted">{{ object.publication_date|date:"Y" }}</small>#}
+{#            </div>#}
+{#                <h2 class="article-title">{{ object.title }}</h2>#}
+{#                <a class="mr-2" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>#}
+{#                <p class="article-content">{{ object.description }}</p>#}
+{#                <p>Liczba dostępnych egzemplarzy: {{ available_books_count }}</p>#}
+{##}
+{#          </div>#}
+{#        </article>#}
+<div class="row featurette">
+    <div class="col-md-4 order-md-1 order-1">  <!-- Zmiana kolejności na mobilnych -->
+        <img class="rounded article-img w-100" src="{{ object.image.url }}" alt="book image">
+    </div>
+
+    <div class="col-md-8 order-md-2 order-2">  <!-- Zmiana kolejności na mobilnych -->
+        <h2 class="featurette-heading fw-normal lh-1">{{ object.title }}</h2>
+
+        <!-- Autor jako link do innych książek tego autora -->
+        <h5 class="text-muted">
+            <a href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>
+        </h5>
+
+        <div class="article-metadata">
+            <small class="text-muted">
+                Kategoria: <a href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a> |
+                Rok wydania: {{ object.publication_date|date:"Y" }}
+            </small>
+        </div>
+
+        <p class="lead">{{ object.description }}</p>
+        <p><strong>Liczba stron:</strong> {{ object.page_count }}</p>
+        <p><strong>Wydawca:</strong> {{ object.publisher }}</p>
+        <p><strong>ASIN:</strong> {{ object.ASIN }}</p>
+        <p><strong>Liczba dostępnych egzemplarzy:</strong> {{ available_books_count }}</p>
+    </div>
+</div>
+
+
+
+
 
 {% endblock %}

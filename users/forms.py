@@ -22,8 +22,8 @@ class UserRegisterForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+    first_name = forms.CharField(label="Imię")
+    last_name = forms.CharField(label="Nazwisko")
 
     class Meta:
         model = User

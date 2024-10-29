@@ -1,39 +1,207 @@
-{% extends "books/index.html" %}
+{% extends "books/home2.html" %}
 {% block content %}
+    {#    {% for book in books %}#}
+    {#        <article class="media content-section">#}
+    {#            <img class="rounded article-img w-25" src="{{ book.image.url }}" alt="book image">#}
+    {#          <div class="media-body">#}
+    {#            <div class="article-metadata">#}
+    {#              <a class="mr-2" href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a>#}
+    {#              <small class="text-muted">{{ book.publication_date|date:"d F Y" }}</small>#}
+    {#            </div>#}
+    {#            <h2><a class="article-title" href="{% url 'book-detail' book.slug %}">{{ book.title }}</a></h2>#}
+    {#              <h3><a class="mr-2" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a></h3>#}
+    {#          </div>#}
+    {#        </article>#}
+    {#    {% endfor %}#}
+    {##}
+    {#<div class="row row-cols-1 row-cols-md-2 g-4">#}
+    {#    {% for book in books %}#}
+    {#    <div class="col d-flex" style="align-items: center;">#}
+    {#        <div class="card mb-3" >#}
+    {#            <div class="row g-0 flex-grow-1 p-1 h-100">#}
+    {#                <div class="col-md-4 ">#}
+    {#                    <img src="{{ book.image.url }}" class="img-fluid h-100" alt="book image" style="object-fit: cover; max-height: 100%;">#}
+    {#                </div>#}
+    {#                <div class="col-md-8 d-flex flex-column">#}
+    {#                    <div class="card-body flex-grow-1">#}
+    {#                        <h5 class="card-title">#}
+    {#                            <a class="article-title" href="{% url 'book-detail' book.slug %}">{{ book.title }}</a>#}
+    {#                        </h5>#}
+    {#                        <h6 class="card-subtitle mb-2 text-muted">#}
+    {#                            <a class="mr-2" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>#}
+    {#                        </h6>#}
+    {#                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
+    {#                        <a class="card-link" href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a>#}
+    {#                        <a href="#" class="card-link">Another link</a>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="card-footer text-muted mt-auto">#}
+    {#                {{ book.publication_date|date:"d F Y" }}#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    {% endfor %}#}
+    {#</div>#}
+
+
+
+    {#<div class="row row-cols-1 row-cols-md-2 g-4">#}
+    {#    {% for book in books %}#}
+    {#    <div class="col d-flex" >#}
+    {#        <div class="card mb-3 flex-grow-1 d-flex flex-column" style="max-width: 540px;">#}
+    {#            <div class="row g-0 flex-grow-1 p-1">#}
+    {#                <div class="col-md-4">#}
+    {#                    <img src="{{ book.image.url }}" class="img-fluid h-100" alt="book image" style="object-fit: cover; max-height: 100%;">#}
+    {#                </div>#}
+    {#                <div class="col-md-8 d-flex flex-column ">#}
+    {#                    <div class="card-body flex-grow-1">#}
+    {#                        <h5 class="card-title">#}
+    {#                            <a class="article-title" href="{% url 'book-detail' book.slug %}">{{ book.title }}</a>#}
+    {#                        </h5>#}
+    {#                        <h6 class="card-subtitle mb-2 text-muted">#}
+    {#                            <a class="mr-2" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>#}
+    {#                        </h6>#}
+    {#                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
+    {#                        <a class="card-link" href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a>#}
+    {#                        <a href="#" class="card-link">Another link</a>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="card-footer text-muted mt-auto">#}
+    {#                {{ book.publication_date|date:"d F Y" }}#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    {% endfor %}#}
+    {#</div>#}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
     {% for book in books %}
-        <article class="media content-section">
-            <img class="rounded article-img w-25" src="{{ book.image.url }}" alt="book image">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="">{{ book.category }}</a>
-              <small class="text-muted">{{ book.publication_date|date:"d F Y" }}</small>
+        <div class="col">
+            <div class="card shadow-sm">
+                <img src="{{ book.image.url }}" class="bd-placeholder-img card-img-top" width="100%" height="444"
+                     alt="book image" style="object-fit: cover;">
+                <div class="card-body">
+                    <p class="card-text">
+                        <a href="{% url 'book-detail' book.slug %}">{{ book.title }}</a> <br>
+                        This is a wider card with supporting text below as a natural lead-in to additional content.
+                        This content is a little bit longer.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-secondary"
+                                    onclick="location.href='{% url 'author-books' book.author.slug %}'">
+                                {{ book.author }}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                    onclick="location.href='{% url 'category-books' book.category.slug %}'">
+                                {{ book.category }}
+                            </button>
+                        </div>
+                        <small class="text-body-secondary">{{ book.publication_date|date:"Y" }}</small>
+                    </div>
+                </div>
             </div>
-            <h2><a class="article-title" href="{% url 'book-detail' book.slug %}">{{ book.title }}</a></h2>
-              <h3><a class="mr-2" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a></h3>
-{#            <p class="article-content">{{ book.author }}</p>#}
-          </div>
-        </article>
-    {% endfor %}
-
-    {% if is_paginated %}
-        <div  class="pagination justify-content-center">
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-      {% endif %}
-
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-      {% endif %}
         </div>
-    {% endif %}
+    {% endfor %}
+</div>
+
+
+    <br>
+
+    {#    {% if is_paginated %}#}
+    {#        <div  class="pagination justify-content-center">#}
+    {#      {% if page_obj.has_previous %}#}
+    {#        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>#}
+    {#        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>#}
+    {#      {% endif %}#}
+    {##}
+    {#      {% for num in page_obj.paginator.page_range %}#}
+    {#        {% if page_obj.number == num %}#}
+    {#          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>#}
+    {#        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}#}
+    {#          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>#}
+    {#        {% endif %}#}
+    {#      {% endfor %}#}
+    {##}
+    {#      {% if page_obj.has_next %}#}
+    {#        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>#}
+    {#        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>#}
+    {#      {% endif %}#}
+    {#        </div>#}
+    {#    {% endif %}#}
+
+{% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <!-- Pierwsza strona i poprzednia strona -->
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&lsaquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" aria-label="First">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&lsaquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <!-- Numery stron -->
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Następna strona i ostatnia strona -->
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&rsaquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&rsaquo;</span>
+                    </a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" aria-label="Last">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+
+
+
 {% endblock %}
