@@ -228,9 +228,12 @@
                 <span class="badge text-bg-light rounded-pill align-text-bottom">{{ borrowed_count }}</span>
             </a>
 
+            <a class="nav-link" href="{% url 'read-books' %}">
+                Przeczytane książki
+                <span class="badge text-bg-light rounded-pill align-text-bottom">{{ read_count }}</span>
+            </a>
 
-            <a class="nav-link" href="#">Explore</a>
-            <a class="nav-link" href="#">Suggestions</a>
+            <a class="nav-link" href="{% url 'profile' %}">Edytuj profil</a>
             <a class="nav-link" href="#">Link</a>
             <a class="nav-link" href="#">Link</a>
             <a class="nav-link" href="#">Link</a>
@@ -244,13 +247,13 @@
 <main class="container">
 
     <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
-    <img class="me-3" src="{% static 'images/favicon.png' %}" alt="" width="48" height="38">
-    <div class="lh-1">
-        <!-- Nagłówek z dniem tygodnia -->
-        <h1 class="h6 mb-0 text-white lh-1" id="header"></h1>
-        <small id="datetime"></small> <!-- Tutaj wyświetli się godzina -->
+        <img class="me-3" src="{% static 'images/favicon.png' %}" alt="" width="48" height="38">
+        <div class="lh-1">
+            <!-- Nagłówek z dniem tygodnia -->
+            <h1 class="h6 mb-0 text-white lh-1" id="header"></h1>
+            <small id="datetime"></small> <!-- Tutaj wyświetli się godzina -->
+        </div>
     </div>
-</div>
 
 
     {% if messages %}

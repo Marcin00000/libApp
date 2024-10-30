@@ -21,16 +21,16 @@
     </div>
 
     <div class="col-md-8 order-md-2 order-2">  <!-- Zmiana kolejności na mobilnych -->
-        <h2 class="featurette-heading fw-normal lh-1">{{ object.title }}</h2>
+        <h2 class="featurette-heading">{{ object.title }}</h2>
 
         <!-- Autor jako link do innych książek tego autora -->
         <h5 class="text-muted">
-            <a href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>
+            <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>
         </h5>
 
         <div class="article-metadata">
             <small class="text-muted">
-                Kategoria: <a href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a> |
+                Kategoria: <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a> |
                 Rok wydania: {{ object.publication_date|date:"Y" }}
             </small>
         </div>

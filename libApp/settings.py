@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'books.context_processors.borrowed_count',
+                'books.context_processors.read_books_count',
             ],
         },
     },

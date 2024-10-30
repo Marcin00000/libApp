@@ -1,12 +1,11 @@
 {% extends "books/home2.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-  <h2>Zwrot książki</h2>
+  <h2>Zwróć książkę</h2>
 
   <form method="POST">
     {% csrf_token %}
     <div class="form-group">
-      <label for="id_code">Podaj kod książki:</label>
       {{ form|crispy }}
     </div>
 

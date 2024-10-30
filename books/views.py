@@ -134,13 +134,18 @@ def return_book(request):
 
 @login_required
 def borrowed_books_view(request):
-    # Pobieramy wszystkie aktywne wypożyczenia dla zalogowanego użytkownika
+    # Pobranie wszystkich aktywnych wypożyczeń dla zalogowanego użytkownika, które nie zostały zwrócone
     loans = Loan.objects.filter(user=request.user, returned=False)
 
-    # Pobieramy egzemplarze książek, które są aktualnie wypożyczone
-    book_instances = [loan.book_instance for loan in loans]
+    # Dodaj bieżący czas do kontekstu
+    current_time = timezone.now()
 
-    return render(request, 'books/borrowed_books.html', {'book_instances': book_instances})
+    # Dodaj liczbę dni pozostałych do zwrotu do każdego wypożyczenia
+    for loan in loans:
+        loan.days_remaining = (loan.due_date - current_time.date()).days
+
+    # Przekazanie bezpośrednio listy wypożyczeń do szablonu
+    return render(request, 'books/borrowed_books.html', {'loans': loans, 'now': current_time})
 
 
 def book_search(request):
@@ -164,3 +169,11 @@ def book_search(request):
         'query': query,
     }
     return render(request, 'books/book_list.html', context)  # Możesz zmienić szablon na odpowiedni
+
+
+@login_required
+def read_books_view(request):
+    # Pobranie wszystkich wypożyczeń dla zalogowanego użytkownika, które zostały zwrócone
+    loans = Loan.objects.filter(user=request.user, returned=True)
+
+    return render(request, 'books/read_books.html', {'loans': loans})

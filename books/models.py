@@ -167,8 +167,10 @@ class Loan(models.Model):
     book_instance = models.ForeignKey(BookInstance, on_delete=models.CASCADE, verbose_name="Egzemplarz książki")
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
     loan_date = models.DateTimeField(auto_now_add=True, verbose_name="Data wypożyczenia")
-    due_date = models.DateTimeField(verbose_name="Termin zwrotu")
+    due_date = models.DateField(verbose_name="Termin zwrotu")  # Zmiana na DateField
     returned = models.BooleanField(default=False, verbose_name="Zwrócono")
+    returned_date = models.DateTimeField(null=True, blank=True, verbose_name="Data zwrotu")
+
 
     def save(self, *args, **kwargs):
         # Przy zapisie, jeśli to nowe wypożyczenie, tworzymy operację
@@ -232,6 +234,7 @@ class Operation(models.Model):
             # Oznacz wypożyczenie jako zwrócone
             if self.loan:
                 self.loan.returned = True
+                self.loan.returned_date = timezone.now()
                 self.loan.save()
 
         # Zapisz operację
