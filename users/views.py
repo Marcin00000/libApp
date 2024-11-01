@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import logout
-# Create your views here.
+
+from .models import Profile
+
 
 def register(request):
     if request.user.is_authenticated:
@@ -44,3 +46,10 @@ def profile(request):
     context = {'u_form': u_form, 'p_form': p_form}
 
     return render(request, 'users/profile.html', context)
+
+
+@login_required
+def profile_view(request):
+    # Pobieranie profilu użytkownika
+    profile = Profile.objects.get(user=request.user)
+    return render(request, 'users/profile_view.html', {'profile': profile})

@@ -1,0 +1,60 @@
+{% extends "books/home2.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row featurette">
+        <!-- Zdjęcie profilowe -->
+        <div class="col-md-5 order-md-1 order-1">
+            <img src="{{ profile.image.url }}" alt="Zdjęcie profilowe" class="img-fluid featurette-image img-thumbnail mx-auto" style="max-width: 100%; height: auto;">
+        </div>
+
+        <!-- Dane użytkownika -->
+        <div class="col-md-7 order-md-2 order-2">
+            <h2 class="featurette-heading fw-normal lh-1">Profil użytkownika: <span class="text-body-secondary">{{ profile.user.username }}</span></h2>
+            <p class="lead">Dane zalogowanego użytkownika.</p>
+
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nick:</th>
+                        <td>{{ profile.user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Imię:</th>
+                        <td>{{ profile.user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nazwisko:</th>
+                        <td>{{ profile.user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">E-mail:</th>
+                        <td>{{ profile.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Data utworzenia:</th>
+                        <td>{{ profile.user.date_joined }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ostatnia aktywność:</th>
+                        <td>{{ profile.user.last_login }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Status:</th>
+                        <td>{{ profile.user.is_active|yesno:"Aktywny,Nieaktywny" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Przeczytane książki:</th>
+                        <td>{{ read_count }}</td>
+                    </tr>
+                     <tr>
+                        <th scope="row">Wypożyczone książki:</th>
+                        <td>{{ borrowed_count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

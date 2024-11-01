@@ -72,17 +72,6 @@ class Book(models.Model):
         verbose_name_plural = "Książki"
 
 
-# class Status(models.Model):
-#     name = models.CharField(max_length=100, verbose_name="Status")
-#
-#     def __str__(self):
-#         return self.name
-#
-#     class Meta:
-#         verbose_name = "Status książki"
-#         verbose_name_plural = "Statusy książki"
-
-
 class BookInstance(models.Model):
     STATUS_CHOICES = [
         ('available', 'Dostępna'),
@@ -114,68 +103,54 @@ class BookInstance(models.Model):
                 return code
 
 
-
-
-# class Operation(models.Model):
-#     OPERATION_TYPE_CHOICES = [
-#         ('borrow', 'Wypożyczenie'),
-#         ('return', 'Zwrot'),
-#     ]
-#
+# class Loan(models.Model):
 #     book_instance = models.ForeignKey(BookInstance, on_delete=models.CASCADE, verbose_name="Egzemplarz książki")
 #     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
-#     operation_type = models.CharField(max_length=10, choices=OPERATION_TYPE_CHOICES, verbose_name="Typ operacji")
-#     operation_date = models.DateTimeField(auto_now_add=True, verbose_name="Data operacji")
-#     return_date = models.DateTimeField(null=True, blank=True, verbose_name="Data zwrotu", help_text="Pozostaw puste, jeśli nie ma daty zwrotu")
+#     loan_date = models.DateTimeField(auto_now_add=True, verbose_name="Data wypożyczenia")
+#     due_date = models.DateField(verbose_name="Termin zwrotu")  # Zmiana na DateField
+#     returned = models.BooleanField(default=False, verbose_name="Zwrócono")
+#     returned_date = models.DateTimeField(null=True, blank=True, verbose_name="Data zwrotu")
 #
-#     def clean(self):
-#         # Weryfikacja operacji 'borrow' (wypożyczenie)
-#         if self.operation_type == 'borrow' and self.book_instance.status != 'available':
-#             raise ValidationError(f"Książka '{self.book_instance}' nie jest dostępna do wypożyczenia.")
-#
-#         # Weryfikacja operacji 'return' (zwrot)
-#         if self.operation_type == 'return' and self.book_instance.status != 'borrowed':
-#             raise ValidationError(f"Książka '{self.book_instance}' nie została wypożyczona, więc nie można jej zwrócić.")
 #
 #     def save(self, *args, **kwargs):
-#         # Wywołanie metody clean przed zapisaniem, aby upewnić się, że walidacje są stosowane
-#         self.clean()
+#         # Przy zapisie, jeśli to nowe wypożyczenie, tworzymy operację
+#         if not self.pk:
+#             super().save(*args, **kwargs)  # Zapisujemy najpierw, aby uzyskać ID wypożyczenia
+#             Operation.objects.create(
+#                 book_instance=self.book_instance,
+#                 user=self.user,
+#                 operation_type='borrow',
+#                 loan=self
+#             )
+#         else:
+#             super().save(*args, **kwargs)
 #
-#         # Zmiana statusu w zależności od operacji
-#         if self.operation_type == 'borrow':
+#         # Zmieniamy status książki na 'borrowed' tylko, jeśli nie została jeszcze zwrócona
+#         if not self.returned:
 #             self.book_instance.status = 'borrowed'
-#             self.return_date = timezone.now() + timezone.timedelta(days=14)  # np. 14 dni na zwrot
-#         elif self.operation_type == 'return':
-#             self.book_instance.status = 'available'
-#             self.return_date = None  # Brak daty zwrotu przy operacji zwrotu
-#
-#         # Zapisz zmiany w statusie książki
-#         self.book_instance.save()
-#
-#         # Zapisz operację
-#         super().save(*args, **kwargs)
+#             self.book_instance.save()
 #
 #     def __str__(self):
-#         return f"{self.user} - {self.get_operation_type_display()} - {self.book_instance}"
+#         return f"{self.user} wypożyczył {self.book_instance} (do {self.due_date})"
 #
 #     class Meta:
-#         verbose_name = "Operacja"
-#         verbose_name_plural = "Operacje"
-
+#         verbose_name = "Wypożyczenie"
+#         verbose_name_plural = "Wypożyczenia"
 
 class Loan(models.Model):
+    MAX_LOANS = 5  # Maksymalna liczba wypożyczeń dla użytkownika
+
     book_instance = models.ForeignKey(BookInstance, on_delete=models.CASCADE, verbose_name="Egzemplarz książki")
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
     loan_date = models.DateTimeField(auto_now_add=True, verbose_name="Data wypożyczenia")
-    due_date = models.DateField(verbose_name="Termin zwrotu")  # Zmiana na DateField
+    due_date = models.DateField(verbose_name="Termin zwrotu")
     returned = models.BooleanField(default=False, verbose_name="Zwrócono")
     returned_date = models.DateTimeField(null=True, blank=True, verbose_name="Data zwrotu")
 
-
     def save(self, *args, **kwargs):
-        # Przy zapisie, jeśli to nowe wypożyczenie, tworzymy operację
+        # Dodaj operację wypożyczenia przy tworzeniu nowego rekordu
         if not self.pk:
-            super().save(*args, **kwargs)  # Zapisujemy najpierw, aby uzyskać ID wypożyczenia
+            super().save(*args, **kwargs)  # Zapisz, aby uzyskać ID wypożyczenia
             Operation.objects.create(
                 book_instance=self.book_instance,
                 user=self.user,
@@ -185,7 +160,7 @@ class Loan(models.Model):
         else:
             super().save(*args, **kwargs)
 
-        # Zmieniamy status książki na 'borrowed' tylko, jeśli nie została jeszcze zwrócona
+        # Zmień status książki na 'borrowed', jeśli nie została zwrócona
         if not self.returned:
             self.book_instance.status = 'borrowed'
             self.book_instance.save()
@@ -196,6 +171,7 @@ class Loan(models.Model):
     class Meta:
         verbose_name = "Wypożyczenie"
         verbose_name_plural = "Wypożyczenia"
+
 
 
 
@@ -246,3 +222,15 @@ class Operation(models.Model):
     class Meta:
         verbose_name = "Operacja"
         verbose_name_plural = "Operacje"
+
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name="Książka")
+    content = models.TextField(max_length=256,verbose_name="Treść komentarza")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
+    is_read = models.BooleanField(default=False, verbose_name="Przeczytana")  # Dodane pole
+
+    def __str__(self):
+        return f"{self.user} - {self.book.title} - {self.created_at}"

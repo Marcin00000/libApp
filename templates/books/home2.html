@@ -202,14 +202,14 @@
                     </li>
 
                 {% endif %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        <li><a class="dropdown-item" href="#">Action</a></li>#}
+{#                        <li><a class="dropdown-item" href="#">Another action</a></li>#}
+{#                        <li><a class="dropdown-item" href="#">Something else here</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
             </ul>
             <form class="d-flex" role="search" method="GET" action="{% url 'book_search' %}">
                 <input class="form-control me-2" type="search" name="q" placeholder="Szukaj..." aria-label="Search">
@@ -222,7 +222,7 @@
 {% if request.user.is_authenticated %}
     <div class="nav-scroller bg-body shadow-sm">
         <nav class="nav" aria-label="Secondary navigation">
-            <a class="nav-link" aria-current="page" href="{% url 'profile' %}">Profil</a>
+            <a class="nav-link" aria-current="page" href="{% url 'profile-view' %}">Profil</a>
             <a class="nav-link" href="{% url 'borrowed_book' %}">
                 Wypożyczone książki
                 <span class="badge text-bg-light rounded-pill align-text-bottom">{{ borrowed_count }}</span>
