@@ -76,58 +76,60 @@
     {#    {% endfor %}#}
     {#</div>#}
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-    {% for book in books %}
-        <div class="col">
-            <div class="card shadow-sm h-100 d-flex flex-column" onclick="window.location.href='{% url 'book-detail' book.slug %}'" style="cursor: pointer;">
-                <img src="{{ book.image.url }}" class="bd-placeholder-img card-img-top" width="100%" height="444" alt="book image" style="object-fit: cover;">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        {% for book in books %}
+            <div class="col">
+                <div class="card shadow-sm h-100 d-flex flex-column"
+                     onclick="window.location.href='{% url 'book-detail' book.slug %}'" style="cursor: pointer;">
+                    <img src="{{ book.image.url }}" class="bd-placeholder-img card-img-top" width="100%" height="444"
+                         alt="book image" style="object-fit: cover;">
 
-                <div class="card-body d-flex flex-column">
-                    <!-- Tytuł książki, ograniczenie do 2 linijek -->
-                    <h5 class="card-title text-truncate-2">{{ book.title }}</h5>
+                    <div class="card-body d-flex flex-column">
+                        <!-- Tytuł książki, ograniczenie do 2 linijek -->
+                        <h5 class="card-title text-truncate-2">{{ book.title }}</h5>
 
-                    <!-- Skrócony opis książki, ograniczenie do 4 linijek -->
-                    <p class="card-text text-truncate-4">{{ book.description }}</p>
+                        <!-- Skrócony opis książki, ograniczenie do 4 linijek -->
+                        <p class="card-text text-truncate-4">{{ book.description }}</p>
 
-                    <!-- Kontener przycisków i dodatkowych informacji wyrównany do dołu -->
-                    <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <div class="btn-group text-wrap">
-                            <button type="button" class="btn btn-sm btn-secondary"
-                                    onclick="event.stopPropagation(); window.location.href='{% url 'author-books' book.author.slug %}'">
-                                {{ book.author }}
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary"
-                                    onclick="event.stopPropagation(); window.location.href='{% url 'category-books' book.category.slug %}'">
-                                {{ book.category }}
-                            </button>
+                        <!-- Kontener przycisków i dodatkowych informacji wyrównany do dołu -->
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <div class="btn-group text-wrap">
+                                <button type="button" class="btn btn-sm btn-secondary"
+                                        onclick="event.stopPropagation(); window.location.href='{% url 'author-books' book.author.slug %}'">
+                                    {{ book.author }}
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        onclick="event.stopPropagation(); window.location.href='{% url 'category-books' book.category.slug %}'">
+                                    {{ book.category }}
+                                </button>
+                            </div>
+                            <small class="text-muted ps-2">{{ book.publication_date|date:"Y" }}</small>
                         </div>
-                        <small class="text-muted ps-2">{{ book.publication_date|date:"Y" }}</small>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 
-<style>
-    /* Ograniczenie do 2 linijek dla tytułu */
-    .text-truncate-2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+    <style>
+        /* Ograniczenie do 2 linijek dla tytułu */
+        .text-truncate-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-    /* Ograniczenie do 4 linijek dla opisu */
-    .text-truncate-4 {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-</style>
+        /* Ograniczenie do 4 linijek dla opisu */
+        .text-truncate-4 {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
 
 
     <br>
@@ -154,74 +156,74 @@
     {#        </div>#}
     {#    {% endif %}#}
 
-{% if is_paginated %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <!-- Pierwsza strona i poprzednia strona -->
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1" aria-label="First">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                        <span aria-hidden="true">&lsaquo;</span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" aria-label="First">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&lsaquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-
-            <!-- Numery stron -->
-            {% for num in page_obj.paginator.page_range %}
-                {% if page_obj.number == num %}
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                    </li>
-                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+    {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <!-- Pierwsza strona i poprzednia strona -->
+                {% if page_obj.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&lsaquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&lsaquo;</span>
+                        </a>
                     </li>
                 {% endif %}
-            {% endfor %}
 
-            <!-- Następna strona i ostatnia strona -->
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                        <span aria-hidden="true">&rsaquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" aria-label="Next">
-                        <span aria-hidden="true">&rsaquo;</span>
-                    </a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="page-link" aria-label="Last">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
-{% endif %}
+                <!-- Numery stron -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Następna strona i ostatnia strona -->
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&rsaquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&rsaquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
 
 
 

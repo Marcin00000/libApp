@@ -11,4 +11,3 @@ admin.site.register(Operation)
 admin.site.register(BookInstance)
 admin.site.register(Loan)
 admin.site.register(Comment)
-

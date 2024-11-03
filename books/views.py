@@ -1,16 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
 from django.utils import timezone
-from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 
-from .forms import CommentForm
-
 from books.forms import BorrowBookForm
 from books.models import Book, Author, Category, BookInstance, Operation, Loan, Comment
+from .forms import CommentForm
 
 
 def home(request):
@@ -93,7 +91,8 @@ def borrow_book(request):
             # Sprawdzenie limitu wypożyczeń
             active_loans_count = Loan.objects.filter(user=request.user, returned=False).count()
             if active_loans_count >= Loan.MAX_LOANS:
-                messages.error(request, "Osiągnąłeś maksymalny limit wypożyczeń. Zwolnij jedną z książek, aby wypożyczyć nową.")
+                messages.error(request,
+                               "Osiągnąłeś maksymalny limit wypożyczeń. Zwolnij jedną z książek, aby wypożyczyć nową.")
                 return redirect('borrow_book')
 
             # Przetwarzanie wypożyczenia książki
@@ -132,32 +131,31 @@ def borrow_book(request):
 @login_required
 def return_book(request):
     if request.method == 'POST':
-        form = BorrowBookForm(request.POST)  # Używamy tego samego formularza do wyszukiwania książki
+        form = BorrowBookForm(request.POST)
         if form.is_valid():
             id_code = form.cleaned_data['id_code']
 
-            # Sprawdzamy, czy istnieje egzemplarz książki o podanym kodzie
             try:
                 book_instance = BookInstance.objects.get(id_code=id_code)
             except BookInstance.DoesNotExist:
                 messages.error(request, f'Nie znaleziono książki o kodzie {id_code}.')
                 return redirect('return_book')
 
-            # Sprawdzamy, czy książka jest wypożyczona przez zalogowanego użytkownika
             try:
                 loan = Loan.objects.get(book_instance=book_instance, user=request.user, returned=False)
             except Loan.DoesNotExist:
                 messages.error(request, f'Książka "{book_instance}" nie jest aktualnie wypożyczona przez Ciebie.')
                 return redirect('return_book')
 
-            # # Ustawienie daty zwrotu i aktualizacja statusu wypożyczenia
-            # loan.returned = True
-            # loan.returned_date = timezone.now()
-            # loan.save()
-            #
-            # # Zmiana statusu książki na 'available'
-            # book_instance.status = 'available'
-            # book_instance.save()
+            # Obliczanie liczby dni spóźnienia
+            current_date = timezone.now().date()
+            delay_days = (current_date - loan.due_date).days
+
+            # Jeśli zwrot jest opóźniony, dodaj punkty karne
+            if delay_days > 0:
+                request.user.profile.penalty_points += delay_days
+                request.user.profile.save()
+                messages.warning(request, f'Dodano punkty karne za spóźnienie: {delay_days}')
 
             # Dodanie operacji zwrotu do modelu Operation
             Operation.objects.create(
@@ -222,3 +220,22 @@ def read_books_view(request):
     return render(request, 'books/read_books.html', {'loans': loans})
 
 
+@login_required
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk, user=request.user)
+    book_slug = comment.book.slug  # Zapamiętujemy slug książki, aby przekierować użytkownika
+    comment.delete()
+    messages.success(request, "Twój komentarz został pomyślnie usunięty.")
+    return redirect('book-detail', slug=book_slug)
+
+
+
+class UserCommentsView(LoginRequiredMixin, ListView):
+    model = Comment
+    template_name = 'books/user_comments.html'  # Szablon wyświetlający komentarze użytkownika
+    context_object_name = 'comments'
+    paginate_by = 10  # Opcjonalne: paginacja
+
+    def get_queryset(self):
+        # Zwraca tylko komentarze zalogowanego użytkownika
+        return Comment.objects.filter(user=self.request.user).order_by('-created_at')

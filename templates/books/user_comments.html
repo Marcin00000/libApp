@@ -1,0 +1,98 @@
+{% extends "books/home2.html" %}
+{% block content %}
+
+    <h2>Moje komentarze</h2>
+    <div class="comments-section">
+        {% for comment in comments %}
+            <div class="comment mb-3 p-3 border rounded d-flex justify-content-between">
+                <div>
+                    <strong>
+                        <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
+                           href="{% url 'book-detail' comment.book.slug %}" class="text-decoration-none">
+                            {{ comment.book.title }}
+                        </a>
+                    </strong>
+                    <p class="text-muted">{{ comment.created_at|date:"d.m.Y H:i" }}</p>
+                    <p>{{ comment.content }}</p>
+                </div>
+
+                <!-- Przycisk usunięcia komentarza -->
+                <form action="{% url 'delete-comment' comment.id %}" method="post"
+                      onsubmit="return confirm('Czy na pewno chcesz usunąć ten komentarz?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                </form>
+            </div>
+        {% empty %}
+            <p class="text-muted">Nie dodałeś jeszcze żadnych komentarzy.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Paginacja -->
+    {% if is_paginated %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&lsaquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&lsaquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&rsaquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&rsaquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+
+{% endblock %}

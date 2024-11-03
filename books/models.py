@@ -1,14 +1,12 @@
 import random
 import string
-import uuid
 
-from django.core.exceptions import ValidationError
+from autoslug import AutoSlugField
 from django.contrib.auth.models import User
-from django.utils import timezone
-
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from autoslug import AutoSlugField
+from django.utils import timezone
 
 
 # Create your models here.
@@ -55,9 +53,9 @@ class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Kategoria")
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE, verbose_name="Wydawca")
     ASIN = models.CharField(max_length=11, verbose_name="ASIN")
-    publication_date = models.DateField( verbose_name="Data publikacji")
-    description = models.TextField( verbose_name="Opis")
-    page_count = models.IntegerField( verbose_name="Liczba stron")
+    publication_date = models.DateField(verbose_name="Data publikacji")
+    description = models.TextField(verbose_name="Opis")
+    page_count = models.IntegerField(verbose_name="Liczba stron")
     image = models.ImageField(default='default.jpg', upload_to='book_pics')
     slug = AutoSlugField(populate_from='title', null=True)
 
@@ -81,7 +79,8 @@ class BookInstance(models.Model):
     ]
 
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    id_code = models.CharField(max_length=6, unique=True, null=True, blank=True, verbose_name="Kod książki", help_text="6 cyfrowy kod książki")
+    id_code = models.CharField(max_length=6, unique=True, null=True, blank=True, verbose_name="Kod książki",
+                               help_text="6 cyfrowy kod książki")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='available', verbose_name="Status książki")
 
     def __str__(self):
@@ -173,8 +172,6 @@ class Loan(models.Model):
         verbose_name_plural = "Wypożyczenia"
 
 
-
-
 class Operation(models.Model):
     OPERATION_TYPE_CHOICES = [
         ('borrow', 'Wypożyczenie'),
@@ -192,7 +189,8 @@ class Operation(models.Model):
     def clean(self):
         if self.operation_type == 'return':
             if self.book_instance.status != 'borrowed':
-                raise ValidationError(f"Książka '{self.book_instance}' nie została wypożyczona, więc nie można jej zwrócić.")
+                raise ValidationError(
+                    f"Książka '{self.book_instance}' nie została wypożyczona, więc nie można jej zwrócić.")
             if not self.loan:
                 raise ValidationError("Operacja zwrotu wymaga przypisanego wypożyczenia.")
             if self.loan.user != self.user:
@@ -224,11 +222,10 @@ class Operation(models.Model):
         verbose_name_plural = "Operacje"
 
 
-
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
     book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name="Książka")
-    content = models.TextField(max_length=256,verbose_name="Treść komentarza")
+    content = models.TextField(max_length=256, verbose_name="Treść komentarza")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
     is_read = models.BooleanField(default=False, verbose_name="Przeczytana")  # Dodane pole
 

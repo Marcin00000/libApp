@@ -1,19 +1,13 @@
-from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django import forms
+
 from books.models import Comment
 
 
 class BorrowBookForm(forms.Form):
     id_code = forms.CharField(max_length=6, label="Kod książki", help_text="Wprowadź 6-cyfrowy kod egzemplarza książki")
 
-
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = ['text']
-#         labels = {'text': 'Treść komentarza'}
-#         widgets = {'text': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Dodaj komentarz...'})}
 
 class CommentForm(forms.ModelForm):
     class Meta:
