@@ -231,3 +231,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.book.title} - {self.created_at}"
+
+
+class FavoriteBook(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name="Książka")
+
+    class Meta:
+        unique_together = ('user', 'book')
+        verbose_name = "Ulubiona książka"
+        verbose_name_plural = "Ulubione książki"
+
+    def __str__(self):
+        return f"{self.user.username} - {self.book.title}"

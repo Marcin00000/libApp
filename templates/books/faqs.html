@@ -1,0 +1,162 @@
+{% extends "books/home2.html" %}
+{% block content %}
+  <h2>FAQs - Często Zadawane Pytania</h2>
+
+  <div class="accordion" id="faqAccordion">
+
+    <!-- Pytanie 1 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Jak mogę się zarejestrować w aplikacji?
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Aby się zarejestrować, kliknij przycisk „Zarejestruj się” na stronie głównej i wypełnij formularz rejestracyjny. Po zakończeniu procesu rejestracji będziesz mógł zalogować się do aplikacji.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 2 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Jak mogę wypożyczyć książkę?
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Aby wypożyczyć książkę, zaloguj się, znajdź interesującą Cię pozycję, a następnie kliknij przycisk „Wypożycz”.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 3 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Jak mogę zwrócić książkę?
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Aby zwrócić książkę, przejdź do sekcji „Twoje wypożyczenia” i kliknij przycisk „Zwróć” obok książki, którą chcesz oddać.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 4 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFour">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Co się stanie, jeśli zwrócę książkę po terminie?
+        </button>
+      </h2>
+      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          W przypadku spóźnienia naliczane są punkty karne, które mogą zablokować możliwość wypożyczania kolejnych książek, dopóki ich liczba nie zostanie uregulowana.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 5 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFive">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Ile maksymalnie książek mogę wypożyczyć?
+        </button>
+      </h2>
+      <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Możesz wypożyczyć maksymalnie 5 książek jednocześnie. Jeśli chcesz wypożyczyć kolejną, musisz najpierw zwrócić jedną z posiadanych książek.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 6 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSix">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          Czy mogę przedłużyć termin zwrotu książki?
+        </button>
+      </h2>
+      <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Tak, przedłużenie terminu zwrotu jest możliwe, jeśli książka nie jest zarezerwowana przez innego użytkownika. Skontaktuj się z bibliotekarzem, aby uzyskać więcej informacji.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 7 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSeven">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          Co zrobić, jeśli książka, którą chcę wypożyczyć, jest niedostępna?
+        </button>
+      </h2>
+      <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Możesz dodać książkę do listy oczekujących, a my poinformujemy Cię, kiedy stanie się dostępna.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 8 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingEight">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+          Jak mogę skontaktować się z biblioteką?
+        </button>
+      </h2>
+      <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Możesz skontaktować się z nami przez formularz kontaktowy dostępny na stronie lub bezpośrednio w siedzibie biblioteki.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 9 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingNine">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+          Jak mogę dodać książkę do ulubionych?
+        </button>
+      </h2>
+      <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Aby dodać książkę do ulubionych, przejdź do jej szczegółów i kliknij ikonę „Dodaj do ulubionych”.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 10 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTen">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+          Jak mogę sprawdzić swoje kary?
+        </button>
+      </h2>
+      <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Informację o swoich punktach karnych znajdziesz na stronie profilu użytkownika.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pytanie 11 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingEleven">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+          Czy mogę usunąć swój komentarz na temat książki?
+        </button>
+      </h2>
+      <div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Tak, możesz usunąć swoje komentarze, przechodząc do sekcji „Moje komentarze” i wybierając opcję „Usuń” przy wybranym komentarzu.
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

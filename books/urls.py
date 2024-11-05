@@ -2,7 +2,8 @@ from django.urls import path
 
 from . import views
 from .views import (BookDetailView, BookListView, AuthorListView, CategoryListView,
-                    borrow_book, borrowed_books_view, return_book, book_search, read_books_view, UserCommentsView)
+                    borrow_book, borrowed_books_view, return_book, book_search, read_books_view, UserCommentsView,
+                    features_view, about, faqs, delete_comment, toggle_favorite, FavoriteBooksView)
 
 urlpatterns = [
     path('dom/', views.home, name='dom'),
@@ -14,8 +15,13 @@ urlpatterns = [
     path('return-book/', return_book, name='return_book'),
     path('search/', book_search, name='book_search'),
     path('read-books/', read_books_view, name='read-books'),
-    path('comment/<int:pk>/delete/', views.delete_comment, name='delete-comment'),
+    path('comment/<int:pk>/delete/', delete_comment, name='delete-comment'),
     path('moje-komentarze/', UserCommentsView.as_view(), name='user-comments'),
+    path('about/', about, name='about'),
+    path('features/', features_view, name='features'),
+    path('faqs/', faqs, name='faqs'),
+    path('toggle-favorite/<int:book_id>/', toggle_favorite, name='toggle-favorite'),
+    path('favorites/', FavoriteBooksView.as_view(), name='favorite-books'),
 
     # path('books/', views.BookListView.as_view(), name='books'),
     # path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),

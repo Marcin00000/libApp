@@ -1,13 +1,14 @@
 {% extends "books/home2.html" %}
+{% load static %}
 {% load crispy_forms_filters %}
 {% block content %}
 
     <div class="row featurette">
-        <div class="col-md-4 order-md-1 order-1">  <!-- Zmiana kolejności na mobilnych -->
+        <div class="col-md-4 order-md-1 order-1">
             <img class="rounded article-img w-100" src="{{ object.image.url }}" alt="book image">
         </div>
 
-        <div class="col-md-8 order-md-2 order-2">  <!-- Zmiana kolejności na mobilnych -->
+        <div class="col-md-8 order-md-2 order-2">
             <h2 class="featurette-heading">{{ object.title }}</h2>
 
             <!-- Autor jako link do innych książek tego autora -->
@@ -18,9 +19,9 @@
 
             <div class="article-metadata">
                 <small class="text-muted">
-                    Kategoria: <a
-                        class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
-                        href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a> |
+                    Kategoria:
+                    <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
+                       href="{% url 'category-books' book.category.slug %}">{{ book.category }}</a> |
                     Rok wydania: {{ object.publication_date|date:"Y" }}
                 </small>
             </div>
@@ -30,9 +31,21 @@
             <p><strong>Wydawca:</strong> {{ object.publisher }}</p>
             <p><strong>ASIN:</strong> {{ object.ASIN }}</p>
             <p><strong>Liczba dostępnych egzemplarzy:</strong> {{ available_books_count }}</p>
+
+            <!-- Opcja Dodaj do ulubionych -->
+            {% if user.is_authenticated %}
+                <button id="favoriteButton" class="btn {{ is_favorite|yesno:'btn-danger,btn-primary' }}"
+                        data-is-favorite="{{ is_favorite|yesno:'true,false' }}"
+                        data-csrf-token="{{ csrf_token }}">
+                    {% if is_favorite %}Usuń z ulubionych{% else %}Dodaj do ulubionych{% endif %}
+                </button>
+            {% endif %}
         </div>
     </div>
     <hr>
+
+    <!-- Kontener na powiadomienia -->
+    <div id="messages"></div>
 
     <!-- Formularz dodawania komentarza -->
     {% if user.is_authenticated %}
@@ -76,5 +89,8 @@
             <p class="text-muted">Brak komentarzy. Bądź pierwszy!</p>
         {% endfor %}
     </div>
+
+    <!-- Odwołanie do zewnętrznego pliku JavaScript -->
+    <script src="{% static 'js/favorites.js' %}"></script>
 
 {% endblock %}

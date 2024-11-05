@@ -2,20 +2,22 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row featurette">
-        <!-- Zdjęcie profilowe -->
-        <div class="col-md-5 order-md-1 order-1">
-            <img src="{{ profile.image.url }}" alt="Zdjęcie profilowe" class="img-fluid featurette-image img-thumbnail mx-auto" style="max-width: 100%; height: auto;">
-        </div>
+    <div class="container mt-5">
+        <div class="row featurette">
+            <!-- Zdjęcie profilowe -->
+            <div class="col-md-5 order-md-1 order-1">
+                <img src="{{ profile.image.url }}" alt="Zdjęcie profilowe"
+                     class="img-fluid featurette-image img-thumbnail mx-auto" style="max-width: 100%; height: auto;">
+            </div>
 
-        <!-- Dane użytkownika -->
-        <div class="col-md-7 order-md-2 order-2">
-            <h2 class="featurette-heading fw-normal lh-1">Profil użytkownika: <span class="text-body-secondary">{{ profile.user.username }}</span></h2>
-            <p class="lead">Dane zalogowanego użytkownika.</p>
+            <!-- Dane użytkownika -->
+            <div class="col-md-7 order-md-2 order-2">
+                <h2 class="featurette-heading fw-normal lh-1">Profil użytkownika: <span
+                        class="text-body-secondary">{{ profile.user.username }}</span></h2>
+                <p class="lead">Dane zalogowanego użytkownika.</p>
 
-            <table class="table table-borderless">
-                <tbody>
+                <table class="table table-striped">
+                    <tbody>
                     <tr>
                         <th scope="row">Nick:</th>
                         <td>{{ profile.user.username }}</td>
@@ -48,13 +50,24 @@
                         <th scope="row">Przeczytane książki:</th>
                         <td>{{ read_count }}</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <th scope="row">Wypożyczone książki:</th>
                         <td>{{ borrowed_count }}</td>
                     </tr>
-                </tbody>
-            </table>
+                    {% if profile.penalty_points == 0 %}
+                        <tr>
+                            <th scope="row">Punkty karne:</th>
+                            <td>{{ profile.penalty_points }}</td>
+                        </tr>
+                    {% else %}
+                        <tr class="table-danger">
+                            <th scope="row">Punkty karne:</th>
+                            <td>{{ profile.penalty_points }}</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
