@@ -1,9 +1,10 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect
 
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CustomLoginForm
 from .models import Profile
 
 
@@ -21,6 +22,12 @@ def register(request):
         else:
             form = UserRegisterForm()
         return render(request, 'users/register.html', {'form': form})
+
+
+class CustomLoginView(LoginView):
+    template_name = 'users/login.html'
+    authentication_form = CustomLoginForm
+    redirect_authenticated_user = True
 
 
 def logout_view(request):

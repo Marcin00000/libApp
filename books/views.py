@@ -2,11 +2,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import redirect
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
-from django.shortcuts import render, get_object_or_404
+
 from books.forms import BorrowBookForm
 from books.models import Book, Author, Category, BookInstance, Operation, Loan, Comment, FavoriteBook
 from .forms import CommentForm
@@ -53,47 +54,6 @@ class CategoryListView(ListView):
         return Book.objects.filter(category=xx)
 
 
-# class BookDetailView(FormMixin, DetailView):
-#     model = Book
-#     form_class = CommentForm
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['available_books_count'] = BookInstance.objects.filter(book=self.object, status='available').count()
-#         context['comments'] = Comment.objects.filter(book=self.object).order_by('-created_at')
-#         context['has_read'] = Loan.objects.filter(user=self.request.user, book_instance__book=self.object,
-#                                                   returned=True).exists() if self.request.user.is_authenticated else False
-#         context['is_favorite'] = FavoriteBook.objects.filter(user=self.request.user, book=self.object).exists() if self.request.user.is_authenticated else False
-#         return context
-#
-#     def post(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         form = self.get_form()
-#         if form.is_valid():
-#             return self.form_valid(form)
-#         else:
-#             return self.form_invalid(form)
-#
-#     def form_valid(self, form):
-#         form.instance.book = self.get_object()
-#         form.instance.user = self.request.user
-#         form.instance.is_read = Loan.objects.filter(user=self.request.user, book_instance__book=self.object,
-#                                                     returned=True).exists()
-#         form.save()
-#         messages.success(self.request, "Twój komentarz został dodany.")
-#         return super().form_valid(form)
-#
-#     def add_to_favorites(self, request, *args, **kwargs):
-#         if request.user.is_authenticated:
-#             book = self.get_object()
-#             favorite, created = FavoriteBook.objects.get_or_create(user=request.user, book=book)
-#             if not created:
-#                 favorite.delete()  # Usuń z ulubionych
-#             return JsonResponse({'success': True, 'is_favorite': not created})
-#
-#     def get_success_url(self):
-#         return self.request.path
-
 class BookDetailView(FormMixin, DetailView):
     model = Book
     form_class = CommentForm
@@ -118,7 +78,7 @@ class BookDetailView(FormMixin, DetailView):
             favorite, created = FavoriteBook.objects.get_or_create(user=request.user, book=self.object)
             if not created:
                 # messages.success(request, "Książka została dodana do ulubionych.")
-            # else:
+                # else:
                 favorite.delete()
                 # messages.success(request, "Książka została usunięta z ulubionych.")
             return JsonResponse({'is_favorite': created})
@@ -144,7 +104,6 @@ class BookDetailView(FormMixin, DetailView):
         return self.request.path
 
 
-
 def borrow_book(request):
     if request.method == 'POST':
         form = BorrowBookForm(request.POST)
@@ -152,13 +111,15 @@ def borrow_book(request):
             # Sprawdzenie punktów karnych użytkownika
             profile = request.user.profile
             if profile.penalty_points > 30:
-                messages.error(request, "Masz ponad 30 punktów karnych. Skontaktuj się z bibliotekarzem, aby uregulować stan punktów.")
+                messages.error(request,
+                               "Masz ponad 30 punktów karnych. Skontaktuj się z bibliotekarzem, aby uregulować stan punktów.")
                 return redirect('borrow_book')
 
             # Sprawdzenie limitu wypożyczeń
             active_loans_count = Loan.objects.filter(user=request.user, returned=False).count()
             if active_loans_count >= Loan.MAX_LOANS:
-                messages.error(request, "Osiągnąłeś maksymalny limit wypożyczeń. Zwolnij jedną z książek, aby wypożyczyć nową.")
+                messages.error(request,
+                               "Osiągnąłeś maksymalny limit wypożyczeń. Zwolnij jedną z książek, aby wypożyczyć nową.")
                 return redirect('borrow_book')
 
             # Przetwarzanie wypożyczenia książki
@@ -295,7 +256,6 @@ def delete_comment(request, pk):
     return redirect('book-detail', slug=book_slug)
 
 
-
 class UserCommentsView(LoginRequiredMixin, ListView):
     model = Comment
     template_name = 'books/user_comments.html'  # Szablon wyświetlający komentarze użytkownika
@@ -319,7 +279,6 @@ def faqs(request):
     return render(request, 'books/faqs.html')
 
 
-
 def toggle_favorite(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     favorite, created = FavoriteBook.objects.get_or_create(user=request.user, book=book)
@@ -333,7 +292,6 @@ def toggle_favorite(request, book_id):
         messages.success(request, f'Usunięto książkę "{book.title}" z ulubionych.')
 
     return redirect('book-detail', slug=book.slug)
-
 
 
 class FavoriteBooksView(ListView):

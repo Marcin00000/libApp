@@ -3,27 +3,38 @@
 {% block title %}Logowanie{% endblock %}
 {% block content %}
 
-<div class="container-sm ">
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Logowanie</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group pb-3">
-                <button class="btn btn-outline-info" type="submit">Zaloguj się</button>
-                <small class="text-muted ml-2">
-{#                    <a href="{% url 'password_reset' %}">Forgot Password?</a>#}
+    <div class="container-sm ">
+        <div class="content-section">
+            <form method="POST" id="login-form">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Logowanie</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group pb-3">
+                    <button class="btn btn-outline-info" type="submit">Zaloguj się</button>
+                    <small class="text-muted ml-2">
+                        {#                    <a href="{% url 'password_reset' %}">Forgot Password?</a>#}
+                    </small>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Potrzebujesz konta? <a class="ml-2" href="{% url 'register' %}">Zarejestruj się</a>
                 </small>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Potrzebujesz konta? <a class="ml-2" href="{% url 'register' %}">Zarejestruj się</a>
-            </small>
         </div>
     </div>
-</div>
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        document.getElementById("login-form").addEventListener("submit", function (event) {
+            // Sprawdź, czy reCAPTCHA została wykonana
+            var response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                // Jeśli reCAPTCHA nie została wykonana, wyświetl komunikat i zatrzymaj wysyłanie formularza
+                alert("Proszę wypełnić reCAPTCHA, aby kontynuować.");
+                event.preventDefault();
+            }
+        });
+    </script>
 {% endblock %}

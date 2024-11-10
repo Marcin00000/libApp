@@ -1,18 +1,18 @@
 {% extends "books/home2.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-  <h2>Zwróć książkę</h2>
+    <h2>Zwróć książkę</h2>
 
-  <form method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-      {{ form|crispy }}
-    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form|crispy }}
+        </div>
 
-    <button type="submit" class="btn btn-primary">Zwróć książkę</button>
-  </form>
+        <button type="submit" class="btn btn-primary">Zwróć książkę</button>
+    </form>
 
-  <hr>
-  <a href="{% url 'borrowed_book' %}">Zobacz swoje wypożyczone książki</a>
+    <hr>
+    <a href="{% url 'borrowed_book' %}">Zobacz swoje wypożyczone książki</a>
 
 {% endblock %}

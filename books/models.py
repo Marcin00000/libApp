@@ -102,40 +102,6 @@ class BookInstance(models.Model):
                 return code
 
 
-# class Loan(models.Model):
-#     book_instance = models.ForeignKey(BookInstance, on_delete=models.CASCADE, verbose_name="Egzemplarz książki")
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
-#     loan_date = models.DateTimeField(auto_now_add=True, verbose_name="Data wypożyczenia")
-#     due_date = models.DateField(verbose_name="Termin zwrotu")  # Zmiana na DateField
-#     returned = models.BooleanField(default=False, verbose_name="Zwrócono")
-#     returned_date = models.DateTimeField(null=True, blank=True, verbose_name="Data zwrotu")
-#
-#
-#     def save(self, *args, **kwargs):
-#         # Przy zapisie, jeśli to nowe wypożyczenie, tworzymy operację
-#         if not self.pk:
-#             super().save(*args, **kwargs)  # Zapisujemy najpierw, aby uzyskać ID wypożyczenia
-#             Operation.objects.create(
-#                 book_instance=self.book_instance,
-#                 user=self.user,
-#                 operation_type='borrow',
-#                 loan=self
-#             )
-#         else:
-#             super().save(*args, **kwargs)
-#
-#         # Zmieniamy status książki na 'borrowed' tylko, jeśli nie została jeszcze zwrócona
-#         if not self.returned:
-#             self.book_instance.status = 'borrowed'
-#             self.book_instance.save()
-#
-#     def __str__(self):
-#         return f"{self.user} wypożyczył {self.book_instance} (do {self.due_date})"
-#
-#     class Meta:
-#         verbose_name = "Wypożyczenie"
-#         verbose_name_plural = "Wypożyczenia"
-
 class Loan(models.Model):
     MAX_LOANS = 5  # Maksymalna liczba wypożyczeń dla użytkownika
 

@@ -1,65 +1,46 @@
 {% extends "books/home2.html" %}
 
 {% block content %}
-{#  <h2>Wypożyczone książki</h2>#}
-{##}
-{#  {% if book_instances %}#}
-{#    <div class="book-list">#}
-{#      {% for book_instance in book_instances %}#}
-{#        <div class="book-detail">#}
-{#          <img src="{{ book_instance.book.image.url }}" alt="Okładka książki" style="max-width: 150px;">#}
-{#          <h3>{{ book_instance.book.title }}</h3>#}
-{#          <p><strong>Autor:</strong> {{ book_instance.book.author }}</p>#}
-{#          <p><strong>Kategoria:</strong> {{ book_instance.book.category }}</p>#}
-{#          <p><strong>Wydawca:</strong> {{ book_instance.book.publisher }}</p>#}
-{#          <p><strong>Data publikacji:</strong> {{ book_instance.book.publication_date }}</p>#}
-{#          <p><strong>Liczba stron:</strong> {{ book_instance.book.page_count }}</p>#}
-{#          <p><strong>ASIN:</strong> {{ book_instance.book.ASIN }}</p>#}
-{#          <p><strong>Kod egzemplarza:</strong> {{ book_instance.id_code }}</p>#}
-{#        </div>#}
-{#      {% endfor %}#}
-{#    </div>#}
-{#  {% else %}#}
-{#    <p>Nie masz aktualnie wypożyczonych książek, które nie zostały zwrócone.</p>#}
-{#  {% endif %}#}
-<h2>Wypożyczone książki: {{ borrowed_count }}</h2>
+    <h2>Wypożyczone książki: {{ borrowed_count }}</h2>
 
-{% if loans %}
-  <div class="row mb-4">
-    {% for loan in loans %}
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    {% if loans %}
+        <div class="row mb-4">
+            {% for loan in loans %}
+                <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 
-          <!-- Sekcja z tekstem (dane książki) -->
-          <div class="col p-4 d-flex flex-column position-static">
-            <h3 class="mb-3">
-              <a class="article-title link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="{% url 'book-detail' loan.book_instance.book.slug %}">{{ loan.book_instance.book.title }}</a>
-            </h3>
-            <p class="mb-1"><strong>Autor:</strong>
-              <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" href="{% url 'author-books' loan.book_instance.book.author.slug %}">{{ loan.book_instance.book.author }}</a>
-            </p>
-            <p class="mb-1"><strong>Wydawca:</strong> {{ loan.book_instance.book.publisher }}</p>
-            <p class="mb-1"><strong>Kod egzemplarza:</strong> {{ loan.book_instance.id_code }}</p>
-            <p class="mb-1 text-body"><strong>Data wypożyczenia:</strong> {{ loan.loan_date|date:"d.m.Y" }}</p>
-            <p class="mb-1 text-body">
-              <strong>Termin zwrotu:</strong> <strong>{{ loan.due_date|date:"d.m.Y" }}</strong>
-              <small>(Pozostałych dni: {{ loan.days_remaining }})</small>
-            </p>
-          </div>
+                        <!-- Sekcja z tekstem (dane książki) -->
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="mb-3">
+                                <a class="article-title link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
+                                   href="{% url 'book-detail' loan.book_instance.book.slug %}">{{ loan.book_instance.book.title }}</a>
+                            </h3>
+                            <p class="mb-1"><strong>Autor:</strong>
+                                <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
+                                   href="{% url 'author-books' loan.book_instance.book.author.slug %}">{{ loan.book_instance.book.author }}</a>
+                            </p>
+                            <p class="mb-1"><strong>Wydawca:</strong> {{ loan.book_instance.book.publisher }}</p>
+                            <p class="mb-1"><strong>Kod egzemplarza:</strong> {{ loan.book_instance.id_code }}</p>
+                            <p class="mb-1 text-body"><strong>Data
+                                wypożyczenia:</strong> {{ loan.loan_date|date:"d.m.Y" }}</p>
+                            <p class="mb-1 text-body">
+                                <strong>Termin zwrotu:</strong> <strong>{{ loan.due_date|date:"d.m.Y" }}</strong>
+                                <small>(Pozostałych dni: {{ loan.days_remaining }})</small>
+                            </p>
+                        </div>
 
-          <!-- Sekcja z obrazkiem (okładka książki) -->
-          <div class="col-auto d-none d-lg-block">
-            <img src="{{ loan.book_instance.book.image.url }}" alt="Okładka książki" width="200" height="321" class="bd-placeholder-img" style="object-fit: cover;">
-          </div>
+                        <!-- Sekcja z obrazkiem (okładka książki) -->
+                        <div class="col-auto d-none d-lg-block">
+                            <img src="{{ loan.book_instance.book.image.url }}" alt="Okładka książki" width="200"
+                                 height="321" class="bd-placeholder-img" style="object-fit: cover;">
+                        </div>
 
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-  </div>
-{% else %}
-  <p>Nie masz aktualnie wypożyczonych książek, które nie zostały zwrócone.</p>
-{% endif %}
-
-
+    {% else %}
+        <p>Nie masz aktualnie wypożyczonych książek, które nie zostały zwrócone.</p>
+    {% endif %}
 
 {% endblock %}
