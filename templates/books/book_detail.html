@@ -11,11 +11,18 @@
         <div class="col-md-8 order-md-2 order-2">
             <h2 class="featurette-heading">{{ object.title }}</h2>
 
+
             <!-- Autor jako link do innych książek tego autora -->
             <h5 class="text-muted">
                 <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
-                   href="{% url 'author-books' book.author.slug %}">{{ book.author }}</a>
+                   href="{% url 'writer-detail' book.author.slug %}">{{ book.author }}</a>
             </h5>
+            <div class="article-metadata">
+                <small class="text-muted">
+                    <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
+                       href="{% url 'author-books' book.author.slug %}">Więcej książek tego autora</a>
+                </small>
+            </div>
 
             <div class="article-metadata">
                 <small class="text-muted">
@@ -51,7 +58,7 @@
     {% if user.is_authenticated %}
         <div class="mt-4">
             <h5>Dodaj komentarz</h5>
-            <form method="post" action="{% url 'book-detail' object.slug %}">
+            <form method="post" id="comment-form" action="{% url 'book-detail' object.slug %}">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button type="submit" class="btn btn-primary mt-1">Dodaj komentarz</button>
@@ -93,4 +100,16 @@
     <!-- Odwołanie do zewnętrznego pliku JavaScript -->
     <script src="{% static 'js/favorites.js' %}"></script>
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        document.getElementById("comment-form").addEventListener("submit", function (event) {
+            // Sprawdź, czy reCAPTCHA została wykonana
+            var response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                // Jeśli reCAPTCHA nie została wykonana, wyświetl komunikat i zatrzymaj wysyłanie formularza
+                alert("Proszę wypełnić reCAPTCHA, aby kontynuować.");
+                event.preventDefault();
+            }
+        });
+    </script>
 {% endblock %}

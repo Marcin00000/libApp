@@ -4,7 +4,7 @@ from django import forms
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV2Checkbox
 
-from books.models import Comment
+from books.models import Comment, AuthorComment
 
 
 class BorrowBookForm(forms.Form):
@@ -16,7 +16,24 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ['content', 'recaptcha']  # Dodaj recaptcha do listy pól
+        fields = ['content', 'recaptcha']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 3, 'cols': 40, 'placeholder': 'Dodaj swój komentarz...'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Dodaj Komentarz'))
+
+
+class AuthorCommentForm(forms.ModelForm):
+    recaptcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
+    class Meta:
+        model = AuthorComment
+        fields = ['content', 'recaptcha']
         widgets = {
             'content': forms.Textarea(attrs={'rows': 3, 'cols': 40, 'placeholder': 'Dodaj swój komentarz...'}),
         }

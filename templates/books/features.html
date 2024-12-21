@@ -1,35 +1,334 @@
 {% extends "books/home2.html" %}
-
 {% block content %}
-    <h2>Funkcje Aplikacji Bibliotecznej</h2>
+    <h2>Funkcje serwisu Cyfrowa Biblioteka</h2>
 
-    <p>Aplikacja oferuje szeroki zakres funkcji, aby ułatwić zarządzanie książkami, komentarzami oraz historią
-        wypożyczeń. Poniżej znajduje się opis głównych funkcji:</p>
+    <div class="accordion" id="featuresAccordion">
 
-    <ul class="list-group my-4">
-        <li class="list-group-item">
-            <strong>Wyszukiwanie książek:</strong> Szybkie wyszukiwanie dostępnych książek według kategorii, autora lub
-            tytułu.
-        </li>
-        <li class="list-group-item">
-            <strong>Wypożyczanie i zwrot książek:</strong> Możliwość wypożyczania oraz zwrotu książek, z opcją
-            zarządzania terminami i naliczania punktów karnych.
-        </li>
-        <li class="list-group-item">
-            <strong>Zarządzanie komentarzami:</strong> Użytkownicy mogą dodawać komentarze do książek, przeglądać swoje
-            komentarze, a także je usuwać.
-        </li>
-        <li class="list-group-item">
-            <strong>Profil użytkownika:</strong> Podgląd historii wypożyczeń, aktualnych wypożyczeń oraz naliczonych
-            punktów karnych za spóźnienia.
-        </li>
-        <li class="list-group-item">
-            <strong>System punktów karnych:</strong> Naliczanie punktów za spóźnienia w zwrotach i blokada wypożyczeń
-            przy przekroczeniu limitu punktów.
-        </li>
-    </ul>
+        <!-- Funkcja 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseOne"
+                        aria-expanded="true" aria-controls="featureCollapseOne">
+                    Przeglądanie książek
+                </button>
+            </h2>
+            <div id="featureCollapseOne" class="accordion-collapse collapse show" aria-labelledby="featureOne"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Każdy użytkownik, zarówno zalogowany, jak i niezalogowany, ma możliwość przeglądania dostępnych
+                    książek w bibliotece. Lista wyświetla podstawowe informacje, takie jak tytuł, autor i gatunek, z
+                    opcją sortowania.
+                </div>
+            </div>
+        </div>
 
-    <p>Każda funkcja została zaprojektowana, aby ułatwić korzystanie z zasobów biblioteki i umożliwić śledzenie
-        aktywności w systemie.</p>
+        <!-- Funkcja 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseTwo" aria-expanded="false" aria-controls="featureCollapseTwo">
+                    Szczegóły książek
+                </button>
+            </h2>
+            <div id="featureCollapseTwo" class="accordion-collapse collapse" aria-labelledby="featureTwo"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Szczegółowa strona każdej książki, dostępna po kliknięciu zdjęcia okładki, zawiera informacje o
+                    opisie, liczbie dostępnych egzemplarzy, autorze, gatunku oraz możliwość dodawania komentarzy i ocen.
+                </div>
+            </div>
+        </div>
 
+        <!-- Funkcja 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseThree" aria-expanded="false"
+                        aria-controls="featureCollapseThree">
+                    Logowanie i rejestracja
+                </button>
+            </h2>
+            <div id="featureCollapseThree" class="accordion-collapse collapse" aria-labelledby="featureThree"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Funkcje logowania i rejestracji zapewniają bezpieczny dostęp do profilu użytkownika. Proces
+                    rejestracji jest prosty i szybki, a logowanie jest zabezpieczone mechanizmem reCAPTCHA.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 4 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseFour" aria-expanded="false" aria-controls="featureCollapseFour">
+                    Wypożyczanie i zwracanie książek
+                </button>
+            </h2>
+            <div id="featureCollapseFour" class="accordion-collapse collapse" aria-labelledby="featureFour"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Zalogowani użytkownicy mogą wypożyczać książki dostępne w systemie. Każda książka ma przypisaną datę
+                    zwrotu widoczną w profilu użytkownika. Zwrot książek jest prosty i intuicyjny – wystarczą dwa
+                    kliknięcia.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 5 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseFive" aria-expanded="false" aria-controls="featureCollapseFive">
+                    Komentarze
+                </button>
+            </h2>
+            <div id="featureCollapseFive" class="accordion-collapse collapse" aria-labelledby="featureFive"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Funkcja umożliwia dodawanie, edytowanie i usuwanie komentarzy do książek. Komentarze widoczne są
+                    publicznie i pomagają innym użytkownikom w wyborze lektury.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 6 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureSix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseSix" aria-expanded="false" aria-controls="featureCollapseSix">
+                    Profil użytkownika
+                </button>
+            </h2>
+            <div id="featureCollapseSix" class="accordion-collapse collapse" aria-labelledby="featureSix"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Profil użytkownika umożliwia przeglądanie wypożyczonych książek, listy przeczytanych pozycji oraz
+                    zarządzanie danymi osobowymi.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 7 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureSeven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseSeven" aria-expanded="false"
+                        aria-controls="featureCollapseSeven">
+                    Lista ulubionych książek
+                </button>
+            </h2>
+            <div id="featureCollapseSeven" class="accordion-collapse collapse" aria-labelledby="featureSeven"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Użytkownicy mogą dodawać książki do listy ulubionych, aby szybko do nich wracać. Funkcja „Dodaj do
+                    ulubionych” pozwala na zarządzanie swoimi ulubionymi pozycjami.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 8 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureEight">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseEight" aria-expanded="false"
+                        aria-controls="featureCollapseEight">
+                    Wyszukiwanie książek
+                </button>
+            </h2>
+            <div id="featureCollapseEight" class="accordion-collapse collapse" aria-labelledby="featureEight"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Wyszukiwarka pozwala znaleźć książki według tytułu, autora lub gatunku.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 9 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureNine">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseNine" aria-expanded="false" aria-controls="featureCollapseNine">
+                    Asystent biblioteczny Rafał
+                </button>
+            </h2>
+            <div id="featureCollapseNine" class="accordion-collapse collapse" aria-labelledby="featureNine"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Rafał, nasz asystent AI, pomaga użytkownikom, odpowiadając na pytania dotyczące strony i książek.
+                    Możesz zadać pytanie, a Rafał udzieli szybkiej odpowiedzi.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 10 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureTen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseTen" aria-expanded="false" aria-controls="featureCollapseTen">
+                    Motywy kolorystyczne
+                </button>
+            </h2>
+            <div id="featureCollapseTen" class="accordion-collapse collapse" aria-labelledby="featureTen"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Użytkownicy mogą przełączać się między jasnym i ciemnym motywem, aby dopasować wygląd aplikacji do
+                    swoich preferencji.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Funkcja 11 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureEleven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseEleven" aria-expanded="false"
+                        aria-controls="featureCollapseEleven">
+                    Paginacja
+                </button>
+            </h2>
+            <div id="featureCollapseEleven" class="accordion-collapse collapse" aria-labelledby="featureEleven"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Lista książek jest podzielona na strony, co umożliwia łatwe przeglądanie dużej liczby pozycji bez
+                    przeciążenia interfejsu.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 12 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureTwelve">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseTwelve" aria-expanded="false"
+                        aria-controls="featureCollapseTwelve">
+                    Szyfrowanie połączenia HTTPS
+                </button>
+            </h2>
+            <div id="featureCollapseTwelve" class="accordion-collapse collapse" aria-labelledby="featureTwelve"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Cała komunikacja z aplikacją jest szyfrowana protokołem HTTPS, co zapewnia bezpieczeństwo danych
+                    użytkowników.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 13 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureThirteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseThirteen" aria-expanded="false"
+                        aria-controls="featureCollapseThirteen">
+                    Certyfikat SSL
+                </button>
+            </h2>
+            <div id="featureCollapseThirteen" class="accordion-collapse collapse" aria-labelledby="featureThirteen"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Serwis posiada zainstalowany certyfikat SSL, gwarantujący wiarygodność strony oraz ochronę
+                    przesyłanych danych.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 14 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureFourteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseFourteen" aria-expanded="false"
+                        aria-controls="featureCollapseFourteen">
+                    Zarządzanie punktami karnymi
+                </button>
+            </h2>
+            <div id="featureCollapseFourteen" class="accordion-collapse collapse" aria-labelledby="featureFourteen"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Użytkownicy otrzymują punkty karne za opóźnienia w zwrotach książek, a przekroczenie limitu blokuje
+                    możliwość wypożyczeń.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 15 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureFifteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseFifteen" aria-expanded="false"
+                        aria-controls="featureCollapseFifteen">
+                    ReCAPTCHA w formularzach
+                </button>
+            </h2>
+            <div id="featureCollapseFifteen" class="accordion-collapse collapse" aria-labelledby="featureFifteen"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Formularze logowania i komentarzy są zabezpieczone reCAPTCHA, co chroni serwis przed spamem i
+                    botami.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 16 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureSixteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseSixteen" aria-expanded="false"
+                        aria-controls="featureCollapseSixteen">
+                    Widok komentarzy użytkownika
+                </button>
+            </h2>
+            <div id="featureCollapseSixteen" class="accordion-collapse collapse" aria-labelledby="featureSixteen"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Zalogowani użytkownicy mogą przeglądać listę swoich komentarzy, edytować je lub usuwać w dowolnym
+                    momencie.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 17 -->
+
+
+        <!-- Funkcja 18 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureEighteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseEighteen" aria-expanded="false"
+                        aria-controls="featureCollapseEighteen">
+                    Filtracja książek
+                </button>
+            </h2>
+            <div id="featureCollapseEighteen" class="accordion-collapse collapse" aria-labelledby="featureEighteen"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Użytkownicy mogą filtrować książki według autora i gatunku, aby łatwo znaleźć interesujące ich
+                    pozycje.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 19 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="featureNineteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#featureCollapseNineteen" aria-expanded="false"
+                        aria-controls="featureCollapseNineteen">
+                    Historia przeczytanych książek
+                </button>
+            </h2>
+            <div id="featureCollapseNineteen" class="accordion-collapse collapse" aria-labelledby="featureNineteen"
+                 data-bs-parent="#featuresAccordion">
+                <div class="accordion-body">
+                    Profil użytkownika zawiera listę przeczytanych książek, co umożliwia śledzenie postępów
+                    czytelniczych.
+                </div>
+            </div>
+        </div>
+
+        <!-- Funkcja 20 -->
+
+
+    </div>
 {% endblock %}

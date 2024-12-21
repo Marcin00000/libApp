@@ -13,6 +13,8 @@ from django.utils import timezone
 class Author(models.Model):
     name = models.CharField(max_length=100, verbose_name="Imię")
     surname = models.CharField(max_length=100, verbose_name="Nazwisko")
+    description = models.TextField(verbose_name="Opis", default="Brak opisu")
+    image = models.ImageField(default='default.jpg', upload_to='author_pics')
     slug = AutoSlugField(populate_from='surname', null=True)
 
     def __str__(self):
@@ -25,6 +27,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Kategoria")
+    description = models.TextField(verbose_name="Opis", default="Brak opisu")
     slug = AutoSlugField(populate_from='name', null=True)
 
     def __str__(self):
@@ -48,22 +51,23 @@ class Publisher(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(max_length=100, verbose_name="Tytuł")
+    title = models.CharField(max_length=100, verbose_name="Tytuł", unique=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Autor")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Kategoria")
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE, verbose_name="Wydawca")
-    ASIN = models.CharField(max_length=11, verbose_name="ASIN")
+    ISBN = models.CharField(max_length=17, verbose_name="ISBN")
     publication_date = models.DateField(verbose_name="Data publikacji")
     description = models.TextField(verbose_name="Opis")
+    summary = models.TextField(verbose_name="Streszczenie historii", default="Brak streszczenia")
     page_count = models.IntegerField(verbose_name="Liczba stron")
     image = models.ImageField(default='default.jpg', upload_to='book_pics')
-    slug = AutoSlugField(populate_from='title', null=True)
+    slug = AutoSlugField(populate_from='title', null=True, max_length=100)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('book-detail', kwargs={'pk': self.pk})
+        return reverse('book-detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = "Książka"
@@ -109,11 +113,11 @@ class Loan(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
     loan_date = models.DateTimeField(auto_now_add=True, verbose_name="Data wypożyczenia")
     due_date = models.DateField(verbose_name="Termin zwrotu")
-    returned = models.BooleanField(default=False, verbose_name="Zwrócono")
+    # returned = models.BooleanField(default=False, verbose_name="Zwrócono")
+    returned = models.IntegerField(default=0, verbose_name="Zwrócono")
     returned_date = models.DateTimeField(null=True, blank=True, verbose_name="Data zwrotu")
 
     def save(self, *args, **kwargs):
-        # Dodaj operację wypożyczenia przy tworzeniu nowego rekordu
         if not self.pk:
             super().save(*args, **kwargs)  # Zapisz, aby uzyskać ID wypożyczenia
             Operation.objects.create(
@@ -195,6 +199,10 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
     is_read = models.BooleanField(default=False, verbose_name="Przeczytana")  # Dodane pole
 
+    class Meta:
+        verbose_name = "Komentarz"
+        verbose_name_plural = "Komentarze"
+
     def __str__(self):
         return f"{self.user} - {self.book.title} - {self.created_at}"
 
@@ -210,3 +218,17 @@ class FavoriteBook(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.book.title}"
+
+
+class AuthorComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Autor")
+    content = models.TextField(max_length=256, verbose_name="Treść komentarza")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
+
+    class Meta:
+        verbose_name = "Komentarz o autorze"
+        verbose_name_plural = "Komentarze o autorach"
+
+    def __str__(self):
+        return f"{self.user} - {self.author.name} {self.author.surname} - {self.created_at}"

@@ -1,6 +1,6 @@
 {% extends "books/home2.html" %}
 {% block content %}
-    <h2>FAQs - Często Zadawane Pytania</h2>
+    <h2>FAQ-s — Często Zadawane Pytania</h2>
 
     <div class="accordion" id="faqAccordion">
 
@@ -16,7 +16,8 @@
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     Aby się zarejestrować, kliknij przycisk „Zarejestruj się” na stronie głównej i wypełnij formularz
-                    rejestracyjny. Po zakończeniu procesu rejestracji będziesz mógł zalogować się do aplikacji.
+                    rejestracyjny. Aby zarejestrować się, należy również rozwiązać reCAPTCHA, aby zapobiec spamowi.
+                    Po zakończeniu procesu rejestracji będziesz mógł zalogować się do aplikacji.
                 </div>
             </div>
         </div>
@@ -33,7 +34,8 @@
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     Aby wypożyczyć książkę, zaloguj się, znajdź interesującą Cię pozycję, a następnie kliknij przycisk
-                    „Wypożycz”.
+                    „Wypożycz” i podaj kod egzemplarza książki. Aby wypożyczyć książkę,
+                    należy również rozwiązać reCAPTCHA, aby zapobiec spamowi.
                 </div>
             </div>
         </div>
@@ -49,8 +51,8 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                    Aby zwrócić książkę, przejdź do sekcji „Twoje wypożyczenia” i kliknij przycisk „Zwróć” obok książki,
-                    którą chcesz oddać.
+                    Aby zwrócić książkę, zaloguj się, kliknij przycisk „Zwróć książkę”, a podaj kod egzemplarza książki,
+                    którą chcesz oddać. Aby zwrócić książkę, należy również rozwiązać reCAPTCHA, aby zapobiec spamowi.
                 </div>
             </div>
         </div>
@@ -67,7 +69,8 @@
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     W przypadku spóźnienia naliczane są punkty karne, które mogą zablokować możliwość wypożyczania
-                    kolejnych książek, dopóki ich liczba nie zostanie uregulowana.
+                    kolejnych książek, dopóki ich liczba nie zostanie uregulowana. Limit punktów to 30, w przypadku
+                    osiągnięcia limitu skontaktuj się z bibliotekarzem, w celu uregulowania punktów.
                 </div>
             </div>
         </div>
@@ -84,7 +87,7 @@
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
                     Możesz wypożyczyć maksymalnie 5 książek jednocześnie. Jeśli chcesz wypożyczyć kolejną, musisz
-                    najpierw zwrócić jedną z posiadanych książek.
+                    najpierw zwrócić jedną z wypożyczonych książek.
                 </div>
             </div>
         </div>
@@ -100,8 +103,8 @@
             <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                    Tak, przedłużenie terminu zwrotu jest możliwe, jeśli książka nie jest zarezerwowana przez innego
-                    użytkownika. Skontaktuj się z bibliotekarzem, aby uzyskać więcej informacji.
+                    Tak, przedłużenie terminu zwrotu jest możliwe. Skontaktuj się z bibliotekarzem, aby uzyskać więcej
+                    informacji.
                 </div>
             </div>
         </div>
@@ -117,7 +120,8 @@
             <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
                  data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                    Możesz dodać książkę do listy oczekujących, a my poinformujemy Cię, kiedy stanie się dostępna.
+                    Jeśli książka jest wypożyczona, poczekaj, aż ktoś zwróci swój egzemplarz lub skontaktuj się z
+                    bibliotekarzem.
                 </div>
             </div>
         </div>
@@ -187,6 +191,501 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- Pytanie 12 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwelve">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                    Czy mogę zasugerować dodanie nowej książki do biblioteki?
+                </button>
+            </h2>
+            <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, możesz zasugerować nową książkę kontaktując się bezpośrednio z bibliotekarzem.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 13 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+                    Czy mogę zmienić swoje dane w profilu użytkownika?
+                </button>
+            </h2>
+            <div id="collapseThirteen" class="accordion-collapse collapse" aria-labelledby="headingThirteen"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, możesz zaktualizować swoje dane w sekcji „Edytuj profil”. Wystarczy zalogować się i edytować
+                    odpowiednie pola.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 14 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFourteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
+                    Czy aplikacja działa na urządzeniach mobilnych?
+                </button>
+            </h2>
+            <div id="collapseFourteen" class="accordion-collapse collapse" aria-labelledby="headingFourteen"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, aplikacja jest w pełni responsywna i można z niej korzystać na urządzeniach mobilnych oraz
+                    tabletach.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 15 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFifteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
+                    Czy aplikacja pozwala na czytanie książek online?
+                </button>
+            </h2>
+            <div id="collapseFifteen" class="accordion-collapse collapse" aria-labelledby="headingFifteen"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Na ten moment aplikacja nie wspiera czytania książek online, ale możesz wypożyczyć książkę
+                    fizycznie.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 16 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSixteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
+                    Czy mogę przeglądać historię swoich wypożyczeń?
+                </button>
+            </h2>
+            <div id="collapseSixteen" class="accordion-collapse collapse" aria-labelledby="headingSixteen"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, historię swoich wypożyczeń znajdziesz w zakładce „Przeczytane książki”.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 17 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeventeen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
+                    Co zrobić, jeśli zapomnę hasła?
+                </button>
+            </h2>
+            <div id="collapseSeventeen" class="accordion-collapse collapse" aria-labelledby="headingSeventeen"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Jeśli zapomnisz hasła, kliknij opcję „Zapomniałem hasła” na stronie logowania. Otrzymasz instrukcje
+                    dotyczące resetowania hasła na podany adres e-mail.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 18 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingEighteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEighteen" aria-expanded="false" aria-controls="collapseEighteen">
+                    Czy mogę zgłosić problem techniczny?
+                </button>
+            </h2>
+            <div id="collapseEighteen" class="accordion-collapse collapse" aria-labelledby="headingEighteen"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, możesz zgłosić problem techniczny wysyłając e-mail na adres wsparcia technicznego.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pytanie 19 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingNineteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseNineteen" aria-expanded="false" aria-controls="collapseNineteen">
+                    Jak mogę sprawdzić listę wypożyczonych książek i terminy ich zwrotu?
+                </button>
+            </h2>
+            <div id="collapseNineteen" class="accordion-collapse collapse" aria-labelledby="headingNineteen"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Listę wypożyczonych książek wraz z datami zwrotu znajdziesz w swoim profilu użytkownika w sekcji
+                    „Wypożyczone książki”.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 20 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwenty">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">
+                    Jak mogę dodać komentarz do książki?
+                </button>
+            </h2>
+            <div id="collapseTwenty" class="accordion-collapse collapse" aria-labelledby="headingTwenty"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Możesz dodać komentarz do książki, przechodząc do jej szczegółów i wypełniając formularz komentarza.
+                    Aby wysłać komentarz, należy również rozwiązać reCAPTCHA, aby zapobiec spamowi.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 21 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyOne" aria-expanded="false" aria-controls="collapseTwentyOne">
+                    Kim jest Rafał – asystent biblioteczny?
+                </button>
+            </h2>
+            <div id="collapseTwentyOne" class="accordion-collapse collapse" aria-labelledby="headingTwentyOne"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Rafał to asystent biblioteczny wykorzystujący sztuczną inteligencję,
+                    który pomaga użytkownikom w poruszaniu się po stronie,
+                    odpowiada na pytania dotyczące funkcji serwisu Cyfrowa Biblioteka,
+                    opisuje książki w bibliotece
+                    oraz poleca książki na podstawie preferencji użytkowników.
+                    Aby zadać pytanie Rafałowi, kliknij przycisk z ikoną dymka w prawym dolnym rogu ekranu.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 22 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyTwo" aria-expanded="false" aria-controls="collapseTwentyTwo">
+                    Czy mogę zmienić motyw kolorystyczny aplikacji?
+                </button>
+            </h2>
+            <div id="collapseTwentyTwo" class="accordion-collapse collapse" aria-labelledby="headingTwentyTwo"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, aplikacja pozwala na zmianę motywu kolorystycznego między jasnym i ciemnym.
+                    Opcję tę znajdziesz w prawym dolnym rogu ekranu.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 23 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyThree" aria-expanded="false" aria-controls="collapseTwentyThree">
+                    Jak działa wyszukiwarka książek?
+                </button>
+            </h2>
+            <div id="collapseTwentyThree" class="accordion-collapse collapse" aria-labelledby="headingTwentyThree"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Wyszukiwarka książek pozwala znaleźć interesujące Cię pozycje po tytule, autorze lub słowach
+                    kluczowych.
+                    Wpisz zapytanie w pole wyszukiwania i zobacz wyniki.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 24 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyFour" aria-expanded="false" aria-controls="collapseTwentyFour">
+                    Skąd mogę wiedzieć, ile egzemplarzy książki jest dostępnych?
+                </button>
+            </h2>
+            <div id="collapseTwentyFour" class="accordion-collapse collapse" aria-labelledby="headingTwentyFour"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Informacja o liczbie dostępnych egzemplarzy znajduje się w szczegółach książki, obok innych danych,
+                    takich jak autor i gatunek.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 25 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyFive" aria-expanded="false" aria-controls="collapseTwentyFive">
+                    Czy mogę filtrować książki według autora lub gatunku?
+                </button>
+            </h2>
+            <div id="collapseTwentyFive" class="accordion-collapse collapse" aria-labelledby="headingTwentyFive"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, aplikacja pozwala na filtrowanie książek według autora i gatunku.
+                    Kliknij imię autora lub nazwę gatunku, aby zobaczyć książki z odpowiednimi parametrami.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 26 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentySix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentySix" aria-expanded="false" aria-controls="collapseTwentySix">
+                    Gdzie mogę zobaczyć moje komentarze?
+                </button>
+            </h2>
+            <div id="collapseTwentySix" class="accordion-collapse collapse" aria-labelledby="headingTwentySix"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Listę komentarzy znajdziesz w zakładce "Moje komentarze", dostępnej po zalogowaniu.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 27 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentySeven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentySeven" aria-expanded="false" aria-controls="collapseTwentySeven">
+                    Czy mogę przeglądać książki bez logowania?
+                </button>
+            </h2>
+            <div id="collapseTwentySeven" class="accordion-collapse collapse" aria-labelledby="headingTwentySeven"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, katalog książek i szczegóły książek są dostępne dla wszystkich użytkowników, także
+                    niezalogowanych.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 28 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyEight">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyEight" aria-expanded="false" aria-controls="collapseTwentyEight">
+                    Jak działa paginacja w katalogu książek?
+                </button>
+            </h2>
+            <div id="collapseTwentyEight" class="accordion-collapse collapse" aria-labelledby="headingTwentyEight"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Katalog książek jest podzielony na strony. Możesz przełączać się między stronami za pomocą
+                    przycisków dalej” i wstecz u dołu katalogu.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pytanie 29 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyNine">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyNine" aria-expanded="false" aria-controls="collapseTwentyNine">
+                    Jakie informacje znajdę w szczegółach książki?
+                </button>
+            </h2>
+            <div id="collapseTwentyNine" class="accordion-collapse collapse" aria-labelledby="headingTwentyNine"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    W szczegółach książki znajdziesz tytuł, autora, opis, liczbę dostępnych egzemplarzy, kategorię,
+                    listę komentarzy,
+                    a także opcję dodania jej do ulubionych.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 30 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirty">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirty" aria-expanded="false" aria-controls="collapseThirty">
+                    Czy mogę oznaczyć książki jako przeczytane?
+                </button>
+            </h2>
+            <div id="collapseThirty" class="accordion-collapse collapse" aria-labelledby="headingThirty"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, po wypożyczeniu i zwróceniu książki widzisz ją jako przeczytaną w swoim profilu użytkownika,
+                    w sekcji „Przeczytane książki”.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 31 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyOne" aria-expanded="false" aria-controls="collapseThirtyOne">
+                    Czy mogę przeglądać listę ulubionych książek?
+                </button>
+            </h2>
+            <div id="collapseThirtyOne" class="accordion-collapse collapse" aria-labelledby="headingThirtyOne"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, lista książek ulubionych jest dostępna w sekcji „Ulubione książki” w Twoim panelu użytkownika.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 32 -->
+
+        <!-- Pytanie 33 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyThree" aria-expanded="false" aria-controls="collapseThirtyThree">
+                    Jakie zabezpieczenia zapewnia reCAPTCHA?
+                </button>
+            </h2>
+            <div id="collapseThirtyThree" class="accordion-collapse collapse" aria-labelledby="headingThirtyThree"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    reCAPTCHA chroni aplikację przed spamem i automatycznym tworzeniem komentarzy oraz kont.
+                    Używamy jej w kluczowych formularzach, takich jak dodawanie komentarzy, rejestracja, wypożyczanie i
+                    zwrócenie książek oraz logowanie.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 34 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyFour" aria-expanded="false" aria-controls="collapseThirtyFour">
+                    Co się stanie, jeśli przekroczę liczbę punktów karnych?
+                </button>
+            </h2>
+            <div id="collapseThirtyFour" class="accordion-collapse collapse" aria-labelledby="headingThirtyFour"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Jeśli przekroczysz 30 punktów karnych, Twoje konto zostanie czasowo zablokowane dla nowych
+                    wypożyczeń. Skontaktuj się z bibliotekarzem w celu rozwiązania sytuacji.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 35 -->
+
+
+        <!-- Pytanie 36 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtySix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtySix" aria-expanded="false" aria-controls="collapseThirtySix">
+                    Jak Rafał pomaga w doborze książek?
+                </button>
+            </h2>
+            <div id="collapseThirtySix" class="accordion-collapse collapse" aria-labelledby="headingThirtySix"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Rafał, nasz asystent biblioteczny, analizuje Twoje preferencje na podstawie krótkiej rozmowy, aby
+                    polecić Ci kolejne interesujące pozycje.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 37 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtySeven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtySeven" aria-expanded="false" aria-controls="collapseThirtySeven">
+                    Jak mogę zobaczyć książki przeczytane przez innych użytkowników?
+                </button>
+            </h2>
+            <div id="collapseThirtySeven" class="accordion-collapse collapse" aria-labelledby="headingThirtySeven"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Ze względu na ochronę prywatności użytkowników, nie możesz zobaczyć książek przeczytanych przez
+                    innych użytkowników.
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pytanie 38 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyEight">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyEight" aria-expanded="false" aria-controls="collapseThirtyEight">
+                    Czy moje połączenie z aplikacją jest bezpieczne?
+                </button>
+            </h2>
+            <div id="collapseThirtyEight" class="accordion-collapse collapse" aria-labelledby="headingThirtyEight"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Tak, wszystkie połączenia z aplikacją są szyfrowane przy użyciu protokołu HTTPS.
+                    Używamy również certyfikatu SSL, aby zapewnić bezpieczeństwo przesyłanych danych,
+                    takich jak hasła czy dane osobowe.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 39 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyNine">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyNine" aria-expanded="false" aria-controls="collapseThirtyNine">
+                    Czym jest certyfikat SSL i jak działa?
+                </button>
+            </h2>
+            <div id="collapseThirtyNine" class="accordion-collapse collapse" aria-labelledby="headingThirtyNine"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Certyfikat SSL (Secure Sockets Layer) jest standardem zabezpieczającym połączenia internetowe.
+                    Szyfruje dane przesyłane między użytkownikiem a serwerem,
+                    uniemożliwiając ich przechwycenie przez osoby trzecie.
+                    Dzięki temu Twoje dane, takie jak hasła i informacje osobiste, są bezpieczne.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 40 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingForty">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseForty" aria-expanded="false" aria-controls="collapseForty">
+                    Co zrobić, jeśli nie znalazłem odpowiedzi w FAQ?
+                </button>
+            </h2>
+            <div id="collapseForty" class="accordion-collapse collapse" aria-labelledby="headingForty"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Jeśli nie znalazłeś odpowiedzi na swoje pytanie w sekcji FAQ,
+                    możesz skorzystać z pomocy Rafała, naszego wirtualnego asystenta.
+                    Rafał jest dostępny, aby odpowiedzieć na Twoje pytania dotyczące aplikacji i książek.
+                    W razie bardziej złożonych problemów możesz także skontaktować się z
+                    bibliotekarzem.
+                </div>
+            </div>
+        </div>
+
+        <!-- Pytanie 41 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFortyOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFortyOne" aria-expanded="false" aria-controls="collapseFortyOne">
+                    Jak skontaktować się z bibliotekarzem?
+                </button>
+            </h2>
+            <div id="collapseFortyOne" class="accordion-collapse collapse" aria-labelledby="headingFortyOne"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Aby skontaktować się z bibliotekarzem, przejdź do sekcji „Kontakt” w serwisie.
+                    Znajdziesz tam email, w którym możesz wysłać swój problem lub zadać pytanie.
+                    Odpowiemy tak szybko, jak to możliwe.
+                </div>
+            </div>
+        </div>
+
 
     </div>
 {% endblock %}

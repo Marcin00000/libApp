@@ -1,4 +1,6 @@
 from .models import Loan
+from django.db.models import Count
+
 
 
 def borrowed_count(request):

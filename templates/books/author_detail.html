@@ -1,0 +1,64 @@
+{% extends "books/home2.html" %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block content %}
+
+    <div class="row featurette">
+        <div class="col-md-4 order-md-1 order-1">
+            <img class="rounded article-img w-100" src="{{ object.image.url }}" alt="author image">
+        </div>
+
+        <div class="col-md-8 order-md-2 order-2">
+            <h2 class="featurette-heading">{{ object.name }} {{ object.surname }}</h2>
+            {#            <div class="article-metadata">#}
+            <a class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover"
+               href="{% url 'author-books' object.slug %}">Książki autora</a>
+            {#            </div>#}
+            <p class="lead">{{ object.description }}</p>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Formularz dodawania komentarza -->
+    {% if user.is_authenticated %}
+        <div class="mt-4">
+            <h5>Dodaj komentarz</h5>
+            <form method="post" action="{% url 'writer-detail' object.slug %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary mt-1">Dodaj komentarz</button>
+            </form>
+        </div>
+    {% else %}
+        <p class="text-muted">Zaloguj się, aby dodać komentarz.</p>
+    {% endif %}
+
+    <!-- Sekcja Komentarzy -->
+    <h4 class="mt-5">Komentarze</h4>
+    <div class="comments-section">
+        {% for comment in comments %}
+            <div class="comment mb-3 p-3 border rounded">
+                <div class="comment-header d-flex justify-content-between">
+                    <div>
+                        <strong class="me-2">{{ comment.user }}</strong>
+                        <small class="text-muted ms-2">{{ comment.created_at|date:"d.m.Y H:i" }}</small>
+                    </div>
+
+                    {% if comment.user == request.user %}
+                        <form action="{% url 'delete-comment' comment.pk %}" method="post" style="display: inline;"
+                              onsubmit="return confirm('Czy na pewno chcesz usunąć ten komentarz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <p class="mt-2">{{ comment.content }}</p>
+            </div>
+        {% empty %}
+            <p class="text-muted">Brak komentarzy. Bądź pierwszy!</p>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/favorites.js' %}"></script>
+
+{% endblock %}
