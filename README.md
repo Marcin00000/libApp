@@ -38,7 +38,7 @@ PASSWORD=your_password
 RECAPTCHA_PUBLIC_KEY=your_recaptcha_public_key
 RECAPTCHA_PRIVATE_KEY=your_recaptcha_private_key
 ```
-> **Uwaga:** Jeśli chcesz używać bazy SQLite zamiast Oracle, zmień wartość `DB` na `sqlite`.
+> **Uwaga:** Jeśli chcesz używać bazy SQLite zamiast Oracle, zmień wartość `DB` na `sqlite`, a `NAME`,`USER` i `PASSWORD` pozostaw puste.
 
 #### 5. Wykonanie migracji
 Wykonaj migracje baz danych za pomocą poniższych poleceń:
