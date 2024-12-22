@@ -9,7 +9,7 @@ Poniżej przedstawiono kroki instalacji i uruchomienia aplikacji:
 #### 1. Pobranie projektu
 Sklonuj repozytorium projektu na lokalną maszynę za pomocą komendy:
 ```bash
-git clone https://github.com/nazwa_uzytkownika/libApp.git
+git clone https://github.com/Marcin00000/libApp.git
 cd libApp
 ```
 
