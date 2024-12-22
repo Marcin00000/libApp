@@ -1,9 +1,8 @@
-Aplikacja Biblioteka
+*Cyfrowa Biblioteka*, *libApp* to aplikacja stworzona w ramach pracy inżynierskiej na studiach. Jej głównym celem jest wspomaganie automatyzacji procesów bibliotecznych, takich jak zarządzanie zbiorami, wypożyczeniami, rejestracja użytkowników oraz integracja z wirtualnym asystentem.
 
-pip install -r requirements.txt
+
 ### Instrukcja instalacji projektu Django *libApp*
 
-*libApp* to aplikacja *Cyfrowa Biblioteka* stworzona w ramach pracy inżynierskiej na studiach. Jej głównym celem jest wspomaganie automatyzacji procesów bibliotecznych, takich jak zarządzanie zbiorami, wypożyczeniami, rejestracja użytkowników oraz integracja z wirtualnym asystentem.
 
 Poniżej przedstawiono kroki instalacji i uruchomienia aplikacji:
 
